@@ -1,0 +1,6 @@
+@import "custom.scss";
+@import "bootstrap/scss/bootstrap";
+
+.custom-controls-stacked.is-invalid~.invalid-feedback {
+    display: block;
+}
