@@ -69,6 +69,15 @@ export default class PaymentForm extends PureComponent {
         return this.handleDataChange.bind(this, fieldName);
     }
 
+    getCheckboxChangeHandler(fieldName) {
+        return () => {
+            this.setState(state => ({
+                [fieldName]: !state[fieldName],
+                validationErrors: null,
+            }));
+        };
+    }
+
     async beforePayment() {
         const {
             amount,
@@ -275,6 +284,21 @@ export default class PaymentForm extends PureComponent {
                         rows={6}
                     />
                     <ValidationError errors={validationErrors} name="wish" />
+                </div>
+
+                <div className="form-group">
+                    <div className="form-check">
+                        <input
+                            id="newsletterInput"
+                            className="form-check-input"
+                            type="checkbox"
+                            checked={newsletter}
+                            onChange={this.getCheckboxChangeHandler('newsletter')}
+                        />
+                        <label className="form-check-label" htmlFor="newsletterInput">
+                            S'inscrire à l'infolettre du Phoenix Musical
+                        </label>
+                    </div>
                 </div>
 
                 <div style={{ textAlign: 'center' }}>
