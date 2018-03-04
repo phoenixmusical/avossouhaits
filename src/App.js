@@ -7,7 +7,7 @@ export default class App extends PureComponent {
     render() {
         return (
             <div className="container my-4">
-                <img src={logo} />
+                <img alt="Phoenix Musical" src={logo} />
                 <div className="jumbotron">
                     <h1 className="display-4">À vos souhaits</h1>
                     <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>

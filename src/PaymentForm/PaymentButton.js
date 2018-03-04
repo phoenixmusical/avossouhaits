@@ -22,12 +22,9 @@ export default class PaymentButton extends PureComponent {
         this.handleAuthorize = this.handleAuthorize.bind(this);
     }
 
-    payment() {
-        const { precheck } = this.props;
-        const isValid = precheck();
-        if (!isValid) {
-            return Promise.reject(new Error('Validation failed'));
-        }
+    async payment() {
+        const { beforePayment } = this.props;
+        const orderID = await beforePayment();
 
         return paypal.rest.payment.create(env, client, {
             transactions: [
@@ -36,6 +33,7 @@ export default class PaymentButton extends PureComponent {
                         total: this.props.total,
                         currency: this.props.currency,
                     },
+                    invoice_number: orderID,
                 },
             ],
         }, {

@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import PaymentButton from './PaymentButton';
 import PaymentErrorMessage from './PaymentErrorMessage';
 import ValidationError from './ValidationError';
+import { makeApiCall } from '../services/api';
 
 const AMOUNT_OPTIONS = [
     {
@@ -42,12 +43,15 @@ export default class PaymentForm extends PureComponent {
             name: '',
             email: '',
             wish: '',
+            newsletter: false,
+            loading: false,
             paid: false,
             cancelled: false,
             validationErrors: null,
             error: null,
+            wishToken: null,
         };
-        this.handleValidate = this.handleValidate.bind(this);
+        this.beforePayment = this.beforePayment.bind(this);
         this.handlePayment = this.handlePayment.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
         this.handleError = this.handleError.bind(this);
@@ -65,12 +69,13 @@ export default class PaymentForm extends PureComponent {
         return this.handleDataChange.bind(this, fieldName);
     }
 
-    handleValidate() {
+    async beforePayment() {
         const {
             amount,
             name,
             email,
             wish,
+            newsletter,
         } = this.state;
         let isValid = true;
         const validationErrors = {};
@@ -94,22 +99,51 @@ export default class PaymentForm extends PureComponent {
             validationErrors.wish = 'Vous devez inscrire votre souhait.';
         }
 
-        if (isValid) {
-            this.setState({ validationErrors: null });
-        } else {
+        if (!isValid) {
             this.setState({ validationErrors });
+            throw new Error('Validation failed');
         }
 
-        return isValid;
+        this.setState({ validationErrors: null });
+        const wishToken = await makeApiCall('addWish', {
+            amount,
+            name,
+            email,
+            wish,
+            newsletter,
+        });
+        console.log('got wish token', wishToken);
+        this.setState({ wishToken });
+        return wishToken;
     }
 
     handlePayment(payment) {
         console.log('payment', payment);
+        const { wishToken } = this.state;
         this.setState({
-            paid: true,
+            loading: true,
             cancelled: false,
             error: null,
         });
+        makeApiCall('addPayment', {
+            wishToken,
+            payerID: payment.payerID,
+            paymentID: payment.paymentID,
+            paymentToken: payment.paymentToken,
+        })
+            .then(result => {
+                console.log('payment added', result);
+                this.setState({
+                    loading: false,
+                    paid: true,
+                });
+            })
+            .catch(error => {
+                this.setState({
+                    loading: false,
+                    error,
+                });
+            });
     }
 
     handleCancel() {
@@ -141,15 +175,25 @@ export default class PaymentForm extends PureComponent {
             name,
             email,
             wish,
+            newsletter,
+            loading,
             paid,
             cancelled,
             error,
             validationErrors,
         } = this.state;
-        if (paid) {
+        if (loading) {
             return (
                 <div>
-                    Paiement reçu
+                    Un instant s'il vous plaît.
+                </div>
+            );
+        }
+
+        if (paid) {
+            return (
+                <div className="alert alert-success">
+                    <h4 className="alert-heading">Paiement reçu</h4>
                 </div>
             );
         }
@@ -237,7 +281,7 @@ export default class PaymentForm extends PureComponent {
                     <PaymentButton
                         total={parseFloat(amount)}
                         currency="CAD"
-                        precheck={this.handleValidate}
+                        beforePayment={this.beforePayment}
                         onSuccess={this.handlePayment}
                         onCancel={this.handleCancel}
                         onError={this.handleError}

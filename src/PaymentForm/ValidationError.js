@@ -8,7 +8,7 @@ export default class ValidationError extends PureComponent {
         }
 
         return (
-            <div class="invalid-feedback">
+            <div className="invalid-feedback">
                 {errors[name]}
             </div>
         );
