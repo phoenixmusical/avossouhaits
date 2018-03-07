@@ -1,4 +1,7 @@
 import React, { PureComponent } from 'react';
+import Reglements from './components/Reglements';
+import Explications from './components/Explications';
+import Video from './components/Video';
 import PaymentForm from './PaymentForm/PaymentForm';
 import './App.css';
 import logo from './logo.png';
@@ -6,16 +9,38 @@ import logo from './logo.png';
 export default class App extends PureComponent {
     render() {
         return (
-            <div className="container my-4">
-                <img alt="Phoenix Musical" src={logo} />
-                <div className="jumbotron">
-                    <h1 className="display-4">À vos souhaits</h1>
-                    <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                    <hr className="my-4" />
-                    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            <div>
+                <header>
+                    <div className="container p-2">
+                        <a href="https://phoenixmusical.ca/">
+                            <img alt="Phoenix Musical" src={logo} />
+                        </a>
+                        <h1 className="display-4">
+                            À vos souhaits!
+                        </h1>
+                    </div>
+                </header>
+
+                <section id="video">
+                    <Video />
+                </section>
+
+                <div className="container my-4">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <Explications />
+                        </div>
+                        <div className="col-md-6">
+                            <PaymentForm />
+                        </div>
+                    </div>
                 </div>
 
-                <PaymentForm />
+                <footer className="py-4">
+                    <div className="container">
+                        <Reglements />
+                    </div>
+                </footer>
             </div>
         );
     }

@@ -4,3 +4,90 @@
 .custom-controls-stacked.is-invalid~.invalid-feedback {
     display: block;
 }
+
+body {
+    background: $gray-100;
+    font-family: 'Open Sans', sans-serif;
+}
+
+header {
+    color: $gray-800;
+
+    img {
+        float: left;
+        height:  3.8rem;
+    }
+
+    h1 {
+        font-family: 'Pragati Narrow', sans-serif;
+        font-weight: 700;
+        text-align: center;
+    }
+}
+
+.custom-radio {
+    label {
+        font-size: 1.1em;
+        line-height: 1.7em;
+    }
+}
+
+#video {
+    background: darken($primary, 15%);
+    border-top: solid 7px darken($primary, 25%);
+}
+
+.videoWrapper {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.video {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	padding-top: 0;
+	height: 0;
+    border-radius: 6px;
+    overflow: hidden;
+
+    iframe {
+    	position: absolute;
+    	top: 0;
+    	left: 0;
+    	width: 100%;
+    	height: 100%;
+    }
+}
+
+.explications {
+    background: $gray-300;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+.form-info-text {
+    background: lighten($primary, 25%);
+    border-radius: 6px;
+
+    a {
+        color: darken($primary, 15%);
+    }
+}
+
+#reglements {
+    ol {
+        padding-left: 25px;
+        li {
+            font-size: 0.85rem;
+        }
+    }
+}
+
+footer {
+    background: $gray-800;
+    color: $gray-200;
+
+    h5 {
+        color: #fff;
+    }
+}

@@ -4,7 +4,7 @@ export default class PaymentErrorMessage extends PureComponent {
     render() {
         const { children, onClick } = this.props;
         return (
-            <div className="alert alert-danger">
+            <div className="alert alert-danger mt-4">
                 <h4 className="alert-heading">Oops!</h4>
                 <p>
                     {children}

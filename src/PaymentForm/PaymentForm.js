@@ -8,23 +8,23 @@ import { makeApiCall } from '../services/api';
 const AMOUNT_OPTIONS = [
     {
         value: '5',
-        label: '5 $',
+        label: '5 $ - 1 participation à la loterie',
     },
     {
         value: '10',
-        label: '10 $',
+        label: '10 $ - 3 participations à la loterie',
     },
     {
         value: '25',
-        label: '25 $',
+        label: '25 $ - 10 participations à la loterie',
     },
     {
         value: '50',
-        label: '50 $',
+        label: '50 $ - 30 participations à la loterie',
     },
     {
         value: '100',
-        label: '100 $',
+        label: '100 $ - Considère ton souhait exaucé!',
     },
 ];
 
@@ -201,7 +201,7 @@ export default class PaymentForm extends PureComponent {
 
         if (paid) {
             return (
-                <div className="alert alert-success">
+                <div className="alert alert-success mt-4">
                     <h4 className="alert-heading">Paiement reçu</h4>
                 </div>
             );
@@ -226,7 +226,11 @@ export default class PaymentForm extends PureComponent {
         }
 
         return (
-            <div>
+            <div className="mt-4">
+                <p className="form-info-text p-2">
+                    Le Phoenix Musical réalisera 3 souhaits, tirés au hasard parmi tous les souhaits reçus. Le tirage aura lieu le 1er mai.
+                    ATTENTION&nbsp;: Lis bien les <a href="#reglements">règlements</a> pour t’assurer que ton souhait est réalisable.
+                </p>
                 <div className="form-group">
                     <div
                         className={formControlClasses(validationErrors, 'amount', 'custom-controls-stacked')}
@@ -248,6 +252,11 @@ export default class PaymentForm extends PureComponent {
                         ))}
                     </div>
                     <ValidationError errors={validationErrors} name="amount" />
+                    <small className="form-text text-muted">
+                        Pour un petit
+                        5$, ton souhait sera entré une fois dans la loterie. Si tu veux avoir plus de chances de gagner, choisis
+                        l’une de nos autres options.
+                    </small>
                 </div>
 
                 <div className="form-group">
@@ -265,7 +274,7 @@ export default class PaymentForm extends PureComponent {
                 <div className="form-group">
                     <label htmlFor="emailInput">Votre adresse courriel</label>
                     <input
-                        type="text"
+                        type="email"
                         id="emailInput"
                         className={formControlClasses(validationErrors, 'email')}
                         value={email}
