@@ -14,7 +14,7 @@ async function callApi(req, res) {
 
     const context = {
         userAgent: req.get('User-Agent'),
-        ipAddress: req.ip,
+        ipAddress: req.get('X-Real-IP'),
     };
     return api[action](context, params || {});
 }

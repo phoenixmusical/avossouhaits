@@ -37,7 +37,7 @@ export default class Video extends PureComponent {
                     <div className="video">
                         <div className="backdrop" onClick={this.closeVideo} />
                         <div className="video-content">
-                            <iframe width="560" height="315" src="https://www.youtube.com/embed/pcfAq6kLZcc?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/pcfAq6kLZcc?rel=0&amp;showinfo=0&amp;autoplay=1" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
                         </div>
                     </div>
                 ) : null}
