@@ -7,6 +7,20 @@ import './App.css';
 import logo from './logo.png';
 
 export default class App extends PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            paid: false,
+        };
+        this.handleSuccess = this.handleSuccess.bind(this);
+    }
+
+    handleSuccess() {
+        this.setState({
+            paid: true,
+        });
+    }
+
     render() {
         return (
             <div>
@@ -26,14 +40,22 @@ export default class App extends PureComponent {
                 </section>
 
                 <div className="container my-4">
-                    <div className="row">
-                        <div className="col-md-6">
-                            <Explications />
+                    {this.state.paid ? (
+                        <div className="alert alert-success mt-4">
+                            <h4 className="alert-heading">Paiement reçu</h4>
                         </div>
-                        <div className="col-md-6">
-                            <PaymentForm />
+                    ) : (
+                        <div className="row">
+                            <div className="col-md-6">
+                                <Explications />
+                            </div>
+                            <div className="col-md-6">
+                                <PaymentForm
+                                    onSuccess={this.handleSuccess}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    )}
                 </div>
 
                 <footer className="py-4">

@@ -8,11 +8,11 @@ const ReactButton = paypal.Button.driver('react', {
     ReactDOM: ReactDOM,
 });
 
-const env = 'sandbox';
+const env = 'production';
 
 const client = {
-    sandbox: 'AQjE0vb2EKnV7rqRPszGrNjVMsrjWv9wD-YJFy5y_zLE5WLQ_XQ-XTBDAkkhBKJ880qXp00LtqNaIkW2',
-    production: 'Abx1ilfcfQE9z52p_EPVn2FfI5vrrXNX-2MUaC5S9o1vwqhjTo1oeT2LDC0KDKMJWlFkqRLDPWrvCCkz',
+    sandbox: 'AQe2DxJT0Pxo8xSBdr7ZtmTIBvIMlgEDf2BYt-EpJpBW6ZFrrUtIc4lcJlIMVCxcw95lxGd1kvXx2TZI',
+    production: 'AcnNF7wbT7ZwelaswqyIvx-7vlWVBn0y1JVPjrMtcKZFsau9l1kyOSth5Nyt4izYB3UyLy0fI42hDYDz',
 };
 
 export default class PaymentButton extends PureComponent {

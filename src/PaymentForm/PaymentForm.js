@@ -45,7 +45,6 @@ export default class PaymentForm extends PureComponent {
             wish: '',
             newsletter: false,
             loading: false,
-            paid: false,
             cancelled: false,
             validationErrors: null,
             error: null,
@@ -142,10 +141,7 @@ export default class PaymentForm extends PureComponent {
         })
             .then(result => {
                 console.log('payment added', result);
-                this.setState({
-                    loading: false,
-                    paid: true,
-                });
+                this.props.onSuccess();
             })
             .catch(error => {
                 this.setState({
@@ -186,7 +182,6 @@ export default class PaymentForm extends PureComponent {
             wish,
             newsletter,
             loading,
-            paid,
             cancelled,
             error,
             validationErrors,
@@ -195,14 +190,6 @@ export default class PaymentForm extends PureComponent {
             return (
                 <div>
                     Un instant s'il vous plaît.
-                </div>
-            );
-        }
-
-        if (paid) {
-            return (
-                <div className="alert alert-success mt-4">
-                    <h4 className="alert-heading">Paiement reçu</h4>
                 </div>
             );
         }

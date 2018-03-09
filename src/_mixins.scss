@@ -1,0 +1,38 @@
+@mixin transition($property, $time, $method) {
+    -webkit-transition: $property $time $method;
+    -moz-transition: $property $time $method;
+    -ms-transition: $property $time $method;
+    -o-transition: $property $time $method;
+    transition: $property $time $method;
+}
+
+@mixin transform($action) {
+    -webkit-transform: $action;
+    -moz-transform: $action;
+    -ms-transform: $action;
+    -o-transform: $action;
+    transform: $action;
+    zoom:1;
+}
+
+@mixin box-shadow($left, $top, $blur, $color, $inset: false) {
+    @if $inset {
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-box-shadow:$color $top $left $blur inset;
+        -moz-box-shadow:$color $top $left $blur inset;
+        box-shadow:$color $top $left $blur inset;
+    } @else {
+        -webkit-box-shadow: $top $left $blur $color;
+        -moz-box-shadow: $top $left $blur $color;
+        box-shadow: $top $left $blur $color;
+    }
+}
+
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+    background-clip: padding-box;  /* stops bg color from leaking outside the border: */
+}
