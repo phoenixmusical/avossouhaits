@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-const API_ENDPOINT = 'http://localhost:3001/api';
+const API_ENDPOINT = '/avossouhaits/api';
 
 export function makeApiCall(action, params) {
     return fetch(API_ENDPOINT, {
