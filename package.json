@@ -1,6 +1,7 @@
 {
   "name": "@phoenixmusical/avossouhaits",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "homepage": "https://phoenixmusical.ca/avossouhaits",
   "private": true,
   "dependencies": {
     "body-parser": "^1.18.2",
